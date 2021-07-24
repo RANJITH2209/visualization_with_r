@@ -1,0 +1,9 @@
+---
+title: "ggplot2_notes"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
