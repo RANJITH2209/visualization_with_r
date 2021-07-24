@@ -3,8 +3,122 @@ title: "R cookbook"
 output: html_notebook
 ---
 
+# libraries needed
 ```{r}
 library(tidyverse)
-library(ggplot2)
+library(gcookbook)
 ```
+
+# 1. R Basics
+## 1.7 Changing Function with %>% 
+
+```{r}
+morley
+glimpse(morley)
+
+morley %>% 
+  filter(Expt == 1) %>% 
+  summary()
+```
+# 2. Quickly Exoploring Data
+## 2.1 Scatter Plot
+
+```{r}
+plot(mtcars$wt, mtcars$mpg)
+
+ggplot(mtcars, aes(x=wt, y = mpg))+
+  geom_point()
+
+ggplot(data = NULL, aes(x = mtcars$wt, y = mtcars$mpg)) +
+  geom_point()
+
+```
+## 2.2 Line graph
+
+
+```{r}
+plot(pressure$temperature, pressure$pressure, type = "l")
+
+plot(pressure$temperature, pressure$pressure, type = "l")
+points(pressure$temperature, pressure$pressure)
+
+lines(pressure$temperature, pressure$pressure/2, col = "red")
+points(pressure$temperature, pressure$pressure/2, col = "red")
+
+ggplot(pressure, aes(x= temperature, y= pressure))+
+  geom_line()+
+  geom_point()
+
+```
+## Bar Graph
+
+```{r}
+# to keep vector as a height
+glimpse(BOD)
+barplot(BOD$demand, names.arg = BOD$Time)
+
+# to count number of values and keep it as a bar on each other
+mtcars %>% 
+  select(cyl) %>% 
+  table() %>% 
+  barplot()
+
+ggplot(BOD, aes(x=Time, y= demand))+
+  geom_col()
+ggplot(BOD,aes(x=factor(Time), y=demand))+
+  geom_col()
+```
+It may make more sense to convert the continuous x variable to a discrete one, with the factor() function.
+
+```{r}
+ggplot(mtcars,aes(x=cyl))+
+  geom_bar()
+
+ggplot(mtcars,aes(x=factor(cyl)))+
+  geom_bar()
+```
+## Histogram
+
+```{r}
+glimpse(mtcars)
+hist(mtcars$mpg)
+
+hist(mtcars$mpg, breaks = 10)
+
+ggplot(mtcars,aes(x=mpg))+
+  geom_histogram()
+
+
+ggplot(mtcars,aes(x=mpg))+
+  geom_histogram(binwidth = 4)
+```
+
+## Box plot
+
+```{r}
+glimpse(ToothGrowth) 
+
+plot(ToothGrowth$supp, ToothGrowth$len)
+```
+x is a factor as opposed to a numeric vector
+
+```{r}
+# Formula syntax
+boxplot(len ~ supp, data = ToothGrowth)
+
+# Put interaction of two variables on x-axis
+boxplot(len ~ supp + dose, data = ToothGrowth)
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
