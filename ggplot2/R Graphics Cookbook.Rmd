@@ -1,9 +1,10 @@
 ---
-title: "ggplot2_notes"
+title: "R cookbook"
 output: html_notebook
 ---
 
 ```{r}
 library(tidyverse)
+library(ggplot2)
 ```
 
